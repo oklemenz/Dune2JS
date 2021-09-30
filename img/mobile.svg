@@ -1,0 +1,57 @@
+<svg width="480" height="300" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="0" refY="5" orient="auto">
+   <polygon points="0 0, 10 5, 0 10" />
+  </marker>
+ </defs>
+ <g transform="scale(0.75)">
+  <title>Touch controls</title>
+  <rect stroke="#000" fill="#fff" opacity="undefined" width="640" height="400" id="svg_1"/>
+  <rect stroke="#000" fill="#eaeaea" opacity="undefined" x="106" y="66" width="426" height="266" id="svg_4"/>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="555" y="207" id="svg_2" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Right</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="25" y="207" id="svg_6" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Left</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="301" y="30" id="svg_11" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Up</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="293" y="52" id="svg_11a" font-size="16" font-family="sans-serif" text-anchor="start" xml:space="preserve">(Block)</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="285" y="355" id="svg_12" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Down</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="284" y="375" id="svg_12a" font-size="16" font-family="sans-serif" text-anchor="start" xml:space="preserve">(Sheathe)</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="25" y="42" id="svg_14" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Jump Left</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="485" y="42" id="svg_13" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Jump Right</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="25" y="365" id="svg_17" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Crawl Left</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="485" y="365" id="svg_16" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Crawl Right </text>
+  <rect stroke="#000" fill="#eaeaea" opacity="undefined" x="213.00001" y="133" width="213" height="133" id="svg_19"/>
+  <text stroke="#000" fill="#000000" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="287" y="200" id="svg_3" font-size="30" font-family="sans-serif" text-anchor="start" xml:space="preserve">Shift</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="268" y="225" id="svg_30a" font-size="16" font-family="sans-serif" text-anchor="start" xml:space="preserve">(Grab / Strike)</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="136" y="187" id="svg_20" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Step</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="140" y="223" id="svg_21" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Left</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="455" y="187" id="svg_22" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Step</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="453" y="223" id="svg_23" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Right</text>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_28" y2="0" x2="213" y1="400" x1="213" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" fill="none"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_29" y2="0" x2="426" y1="400" x1="426" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_31" y2="133" x2="640" y1="133" x1="0" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" stroke="#000" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_32" y2="266" x2="640" y1="266" x1="0" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" stroke="#000" fill="none"/>
+  <text stroke-width="0" stroke="#000" fill="#000000" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="290" y="107" id="svg_37" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Grab</text>
+  <text stroke-width="0" stroke="#000" fill="#000000" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="291" y="307" id="svg_38" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Grab</text>
+  <text stroke-width="0" stroke="#000" fill="#000000" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="453" y="107" id="svg_43" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Grab</text>
+  <text stroke-width="0" stroke="#000" fill="#000000" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="135" y="107" id="svg_44" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Grab</text>
+  <text stroke-width="0" stroke="#000" fill="#000000" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="135" y="307" id="svg_45" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Grab</text>
+  <text stroke-width="0" stroke="#000" fill="#000000" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="454" y="307" id="svg_46" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve">Grab</text>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_40" y2="0" x2="64" y1="400" x1="64" opacity="undefined" fill-opacity="null" stroke-opacity="0.5" stroke-dasharray="1,5" fill="none"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_41" y2="0" x2="128" y1="400" x1="128" opacity="undefined" fill-opacity="null" stroke-opacity="0.5" stroke-dasharray="1,5" fill="none"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_42" y2="0" x2="192" y1="400" x1="192" opacity="undefined" fill-opacity="null" stroke-opacity="0.5" stroke-dasharray="1,5" fill="none"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_43" y2="0" x2="256" y1="400" x1="256" opacity="undefined" fill-opacity="null" stroke-opacity="0.5" stroke-dasharray="1,5" fill="none"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_44" y2="0" x2="320" y1="400" x1="320" opacity="undefined" fill-opacity="null" stroke-opacity="0.5" stroke-dasharray="1,5" fill="none"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_45" y2="0" x2="384" y1="400" x1="384" opacity="undefined" fill-opacity="null" stroke-opacity="0.5" stroke-dasharray="1,5" fill="none"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_46" y2="0" x2="448" y1="400" x1="448" opacity="undefined" fill-opacity="null" stroke-opacity="0.5" stroke-dasharray="1,5" fill="none"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_47" y2="0" x2="512" y1="400" x1="512" opacity="undefined" fill-opacity="null" stroke-opacity="0.5" stroke-dasharray="1,5" fill="none"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_48" y2="0" x2="576" y1="400" x1="576" opacity="undefined" fill-opacity="null" stroke-opacity="0.5" stroke-dasharray="1,5" fill="none"/>
+  <line stroke="#000" marker-end="url(#arrowhead)" stroke-linecap="null" stroke-linejoin="null" id="svg_48" y2="80" x2="32" y1="170" x1="32" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="5,5" fill="none"/>
+  <line stroke="#000" marker-end="url(#arrowhead)" stroke-linecap="null" stroke-linejoin="null" id="svg_48" y2="80" x2="608" y1="170" x1="608" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="5,5" fill="none"/>
+  <line stroke="#000" marker-end="url(#arrowhead)" stroke-linecap="null" stroke-linejoin="null" id="svg_48" y2="80" x2="320" y1="160" x1="320" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="5,5" fill="none"/>
+  <line stroke="#000" marker-end="url(#arrowhead)" stroke-linecap="null" stroke-linejoin="null" id="svg_48" y2="160" x2="250" y1="100" x1="80" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="5,5" fill="none"/>
+  <line stroke="#000" marker-end="url(#arrowhead)" stroke-linecap="null" stroke-linejoin="null" id="svg_48" y2="160" x2="390" y1="100" x1="560" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="5,5" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_32" y2="384" x2="640" y1="384" x1="0" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" stroke="#000" fill="none"/>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="221" y="395" id="svg_17" font-size="10" font-family="sans-serif" text-anchor="start" xml:space="preserve">(1x) Remaining Time / (2x) Restart Level</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="10" y="395" id="svg_17" font-size="10" font-family="sans-serif" text-anchor="start" xml:space="preserve">(2x) Previous Level</text>
+  <text stroke="#000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-opacity="null" fill-opacity="null" opacity="undefined" x="555" y="395" id="svg_17" font-size="10" font-family="sans-serif" text-anchor="start" xml:space="preserve">(2x) Next Level</text>
+ </g>
+</svg>

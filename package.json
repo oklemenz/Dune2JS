@@ -1,0 +1,23 @@
+{
+  "name": "dune2-js",
+  "version": "1.0.0",
+  "description": "Dune II (JavaScript)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "http-server --cors=*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oklemenz/DuneII.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oklemenz/DuneII/issues"
+  },
+  "homepage": "https://github.com/oklemenz/DuneII#readme",
+  "devDependencies": {
+    "http-server": "^13.0.2"
+  }
+}

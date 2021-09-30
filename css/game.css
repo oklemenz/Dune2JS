@@ -1,0 +1,320 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+body,
+body * {
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+}
+
+.game {
+    margin: auto;
+    width: 100vw;
+    height: 100vh;
+}
+
+.game_container {
+  display: block;
+}
+
+.section-divider {
+    float: left;
+    width: 100%;
+    background-color: rgb(237, 237, 240);
+    height: .188em;
+    margin-top: .313em;
+}
+
+.icon {
+    padding: 10px;
+    background-color: #1F5497;
+}
+
+.small-image {
+    width: 71px;
+    height: 40px;
+}
+
+.color-gray {
+    color: gray;
+}
+
+.hidden-link {
+    color: black;
+    text-decoration: none;
+}
+
+#canvas::selection {
+    background:transparent;
+}
+
+#canvas::-moz-selection {
+    background:transparent;
+}
+
+#canvas::-webkit-selection {
+    background:transparent;
+}
+
+#canvas {
+   margin: 0;
+   padding: 0;
+   border: 0 none;
+   clear: both;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.canvas_container {
+    position: relative;
+    margin: auto;
+}
+
+.canvas_overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: black;
+    display: table;
+}
+
+.click_to_start {
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+}
+
+.click_to_start .huge {
+    font-size: 1.5em;
+    color: white;
+    display: block;
+}
+
+.canvas_overlay .loader {
+  background: url(../img/loading.gif) no-repeat center center;
+  cursor: progress;
+  vertical-align: middle;
+  text-align: center;
+  display: none;
+}
+
+.loader .info {
+  position: relative;
+  top: 150px;
+  margin: 0 auto;
+}
+
+.loader .status {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.loader .progressbar {
+}
+
+.ui-dialog {
+  overflow: visible;
+}
+
+.login_modal {
+  display: none;
+  overflow: visible !important;
+}
+
+p.social {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+form.login label {
+  display: block;
+  overflow: hidden;
+}
+
+form.login input {
+  width: 100%;
+  font-size: 1.5em !important;
+}
+
+form.login div.input {
+  padding-left: .2em;
+  margin-bottom: 10px;
+}
+
+form.register label {
+  display: block;
+  overflow: hidden;
+}
+
+form.register input {
+  width: 300px;
+  font-size: 1.5em !important;
+}
+
+form.register div.input {
+  padding-left: .2em;
+  margin-bottom: 10px;
+}
+
+div.error {
+  background: rgb(255, 187, 187);
+  display: inline-block;
+  padding: 15px;
+  -moz-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+  -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+  box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+}
+
+.fatal {
+  font-size: 1.5em;
+  color: red;
+}
+
+.registration_error {
+  background: rgb(255, 200, 200);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.openxcom {
+    width: 960px;
+    height: 600px;
+}
+
+.openxcom canvas {
+  cursor: none;
+    width: 960px;
+    height: 600px;
+}
+
+.openxcom_eula, .dialog {
+  display: none;
+}
+
+.openxcom_eula label {
+  display: block;
+  font-weight: bold;
+}
+
+.openxcom_eula input, .dialog input {
+  display: block;
+  width: 600px;
+  font-size: 1.2em;
+  padding: 5px;
+}
+
+.openxcom_eula .label {
+  margin-bottom: 5px;
+}
+
+.openxcom_eula .data_link {
+  background: rgb(200, 255,200);
+  padding: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px dashed black;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.dialog .label, .dialog label  {
+  display: block;
+  font-weight: bold;
+  margin: 2px 0;
+}
+
+.select-file-dialog-saves {
+  max-height: 150px;
+  overflow: auto;
+}
+
+.select-file-dialog-saves {
+  margin: 0;
+  padding: 5px 0;
+  background: #F0F0F0;
+  border: 1px solid #CCC;
+}
+
+.select-file-dialog-saves span {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+.select-file-dialog-saves li {
+  padding: 0;
+  margin: 4px 0px 0px 20px;
+  list-style-type: none;
+  cursor: pointer;
+  text-decoration: underline;
+  color: black;
+}
+
+.opendune-house-container {
+  margin: 0 auto;
+  width: 510px;
+}
+
+.small .ui-dialog {
+    width: 100% !important;
+}
+
+.small .opendune-house-container  {
+  width: 100%;
+}
+
+.opendune-house {
+  float: left;
+  width: 124px;
+  height: 136px;
+  display: block;
+  cursor: pointer;
+  margin: 0 20px 30px 20px;
+  opacity: 0.5;
+  transition: opacity 300ms;
+  -webkit-transition: opacity 300ms;
+}
+
+.opendune-house:hover {
+  opacity: 1.0;
+}
+
+.opendune-h-house {
+  background: url("../img/h_house.png") no-repeat center center;
+}
+
+.opendune-a-house {
+  background: url("../img/a_house.png") no-repeat center center;
+}
+
+.opendune-o-house {
+  background: url("../img/o_house.png") no-repeat center center;
+}
+
+.opendune-select-house {
+  text-align: center;
+  margin: 15px 0;
+  font-weight: bold;
+}

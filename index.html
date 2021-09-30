@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dune II - The Building of A Dynasty</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0.0, viewport-fit=cover"/>
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="PrinceJS" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="img/touch-icon-152.png" />
+    <link rel="apple-touch-icon" href="img/touch-icon-152.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="img/touch-icon-152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/touch-icon-180.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link type="text/css" rel="stylesheet" href="css/game.css">
+    <link type="text/css" rel="stylesheet" media="all" href="css/aristo.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+      var Epicport = {}; // Namespace
+      Epicport.i18n = {
+        html_login_success_title: "You successfully logged in",
+        html_can_save_desc: "Now you can save games",
+        html_can_load_desc: "Now you can load game saves",
+        html_success: "Success",
+        html_game_saved: "Game successfully saved",
+        html_ok: "Ok",
+        html_cancel: "Cancel",
+      };
+      var query = new URLSearchParams(window.location.search);
+      Epicport.profile = {
+        identity: query.get("profile") || "public"
+      };
+    </script>
+    <script type="text/javascript" src="js/async.js"></script>
+    <script type="text/javascript" src="js/dialog.js"></script>
+    <script type="text/javascript" src="js/canvas.js"></script>
+    <script type="text/javascript" src="js/dune2.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/parse.min.js"></script>
+    <script>
+      // https://parse-dashboard.back4app.com/apps/83701dbe-3bbe-4bf8-a050-cc9c3ec57452/server-settings > Core Settings > Settings
+      // App Id, Javascript Key
+      Parse.initialize("49Ep7UTHKcvkPYvxbEXBM9k0nb6TSh8oL6yakWCW", "1bTKz5nD7iusYBiyNw8CnaTNvwuy63PWxKYu67IU");
+      Parse.serverURL = "https://parseapi.back4app.com/";
+    </script>
+</head>
+<body oncontextmenu="return false;">
+    <div class="dune2-select-house-dialog dialog" title="Choose your side">
+        <div class="opendune-house-container">
+            <p class="opendune-select-house">Choose your side</p>
+            <p class="opendune-house opendune-a-house" title="House Atreides"></p>
+            <p class="opendune-house opendune-o-house" title="House Ordos"></p>
+            <p class="opendune-house opendune-h-house" title="House Harkonnen"></p>
+        </div>
+    </div>
+    <div class="game_container opendune game">
+        <canvas id="canvas"></canvas>
+        <div id="output" class="canvas_overlay">
+            <div class="click_to_start">
+                <span class="huge">Press to Start</span>
+            </div>
+            <div class="loader">
+                <div class="info">
+                    <div id="status" class="status">Loading...</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="select-file-dialog dialog" title="Select file">
+        <p class="label">
+            Select file
+        </p>
+        <ul class="select-file-dialog-saves">
+            <span>No saved games found</span>
+        </ul>
+        <p></p>
+        <p class="select-file-input">
+            <label for="select-file-dialog-file">Enter file name</label>
+            <input id="select-file-dialog-file" type="text" value="">
+        </p>
+    </div>
+    <script type="text/javascript">
+      Epicport.API = new Epicport.API({
+        game: "opendune",
+        arguments: ["-a"],
+        preRun: function () {
+        },
+        start:
+          function () {
+            var preventUpDown = function (e) {
+              if (e.keyCode === 38 || e.keyCode === 40) {
+                e.preventDefault();
+              }
+            }
+            document.addEventListener("keydown", preventUpDown);
+            document.addEventListener("keyup", preventUpDown);
+            document.addEventListener("keypress", preventUpDown);
+            var dune2 = new Epicport.Dune2();
+            dune2.start('js/opendune.js');
+          },
+        js: '/js/opendune.js'
+      });
+      var Module = Epicport.API.module();
+
+      function setSize() {
+        var ratio = 640 / 400;
+        var gameContainer = jQuery(".game_container");
+        var size = jQuery(window);
+        var width = parseInt(size.width());
+        var height = parseInt(size.height());
+        if (width >= height) {
+            gameContainer.width(height * ratio);
+            gameContainer.height(height);
+            gameContainer.css("padding-top", "");
+            gameContainer.parent().removeClass("small");
+        } else {
+            gameContainer.width(width);
+            gameContainer.height(width / ratio);
+            gameContainer.css("padding-top", (height - width / ratio) / 2);
+            gameContainer.parent().addClass("small");
+        }
+      }
+      jQuery(document).ready(function () {
+        setSize();
+      });
+      $(window).on("resize orientationchange", function() {
+        setSize();
+      });
+
+      function touchHandler(event) {
+        var touch = event.changedTouches[0];
+        var simulatedEvent = new MouseEvent({
+          touchstart: "mousedown",
+          touchmove: "mousemove",
+          touchend: "mouseup"
+        }[event.type], {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+          detail: 0,
+          screenX: touch.screenX,
+          screenY: touch.screenY,
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+          mouseMovementX: 0,
+          mouseMovementY: 0,
+          ctrlKey: false,
+          altKey: false,
+          shiftKey: false,
+          metaKey: false,
+          button: 0,
+          relatedTarget: null,
+        });
+        touch.target.dispatchEvent(simulatedEvent);
+      }
+      var canvas = jQuery("canvas")[0];
+      canvas.addEventListener("touchstart", touchHandler, true);
+      canvas.addEventListener("touchmove", touchHandler, true);
+      canvas.addEventListener("touchend", touchHandler, true);
+    </script>
+</body>
