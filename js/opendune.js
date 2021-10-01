@@ -247,38 +247,38 @@ Module['EM_MIDI_AUDIO'].addEventListener('ended', function() {
 
 Module['EM_MIDI_CURRENT'] = 0;
 Module['EM_MIDI_FILES'] = {
-  1: '/dune2/music/1.ogg',
-  2: '/dune2/music/2.ogg', 
-  3: '/dune2/music/3.ogg', 
-  4: '/dune2/music/4.ogg', 
-  5: '/dune2/music/5.ogg', 
-  6: '/dune2/music/6.ogg', 
-  7: '/dune2/music/7.ogg', 
-  8: '/dune2/music/8.ogg', 
-  9: '/dune2/music/9.ogg', 
-  10: '/dune2/music/10.ogg', 
-  11: '/dune2/music/11.ogg', 
-  12: '/dune2/music/12.ogg', 
-  13: '/dune2/music/13.ogg', 
-  14: '/dune2/music/14.ogg', 
-  15: '/dune2/music/15.ogg', 
-  16: '/dune2/music/16.ogg', 
-  17: '/dune2/music/17.ogg', 
-  18: '/dune2/music/18.ogg', 
-  19: '/dune2/music/19.ogg', 
-  20: '/dune2/music/20.ogg', 
-  21: '/dune2/music/21.ogg', 
-  22: '/dune2/music/22.ogg', 
-  24: '/dune2/music/24.ogg', 
-  25: '/dune2/music/25.ogg', 
-  26: '/dune2/music/26.ogg', 
-  28: '/dune2/music/28.ogg', 
-  29: '/dune2/music/29.ogg', 
-  30: '/dune2/music/30.ogg', 
-  31: '/dune2/music/31.ogg', 
-  32: '/dune2/music/32.ogg', 
-  33: '/dune2/music/33.ogg', 
-  34: '/dune2/music/34.ogg'
+  1: '/music/1.mp3',
+  2: '/music/2.mp3',
+  3: '/music/3.mp3',
+  4: '/music/4.mp3',
+  5: '/music/5.mp3',
+  6: '/music/6.mp3',
+  7: '/music/7.mp3',
+  8: '/music/8.mp3',
+  9: '/music/9.mp3',
+  10: '/music/10.mp3',
+  11: '/music/11.mp3',
+  12: '/music/12.mp3',
+  13: '/music/13.mp3',
+  14: '/music/14.mp3',
+  15: '/music/15.mp3',
+  16: '/music/16.mp3',
+  17: '/music/17.mp3',
+  18: '/music/18.mp3',
+  19: '/music/19.mp3',
+  20: '/music/20.mp3',
+  21: '/music/21.mp3',
+  22: '/music/22.mp3',
+  24: '/music/24.mp3',
+  25: '/music/25.mp3',
+  26: '/music/26.mp3',
+  28: '/music/28.mp3',
+  29: '/music/29.mp3',
+  30: '/music/30.mp3',
+  31: '/music/31.mp3',
+  32: '/music/32.mp3',
+  33: '/music/33.mp3',
+  34: '/music/34.mp3'
 };
 
 var _js_music_play = function(index) {
@@ -8262,7 +8262,8 @@ function copyTempDouble(ptr) {
               type: 'mousedown',
               button: 0,
               pageX: touchX,
-              pageY: touchY
+              pageY: touchY,
+              touching: true,
             };
             SDL.DOMButtons[0] = 1;
             SDL.events.push(event);
@@ -8276,7 +8277,8 @@ function copyTempDouble(ptr) {
               type: 'mousemove',
               button: 0,
               pageX: touchX,
-              pageY: touchY
+              pageY: touchY,
+              touching: true,
             };
             SDL.events.push(event);
             break;
@@ -8286,7 +8288,8 @@ function copyTempDouble(ptr) {
               type: 'mouseup',
               button: 0,
               pageX: touchX,
-              pageY: touchY
+              pageY: touchY,
+              touching: true,
             };
             SDL.DOMButtons[0] = 0;
             SDL.events.push(event);
@@ -8316,12 +8319,13 @@ function copyTempDouble(ptr) {
               event.preventDefault();
             }
 
-            if (event.type == "mousedown") {
+            if (event.type == "mousedown" || event.type == "mouseup") {
               var event1 = {
                 type: 'mousemove',
                 button: button,
                 pageX: event.pageX,
-                pageY: event.pageY
+                pageY: event.pageY,
+                touching: event.touching
               };
               SDL.events.push(event1);
             }
@@ -8524,20 +8528,22 @@ function copyTempDouble(ptr) {
             break;
           }
           case 'mousedown': case 'mouseup': case 'mousemove': {
-            if (event.type != 'mousemove') {
-              var down = event.type === 'mousedown';
-              tempBigInt=SDL.DOMEventToSDLEvent[event.type];HEAP8[(ptr)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(1))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(2))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(3))|0)]=tempBigInt&0xff;
-              HEAP8[(((ptr)+(8))|0)]=event.button+1; // DOM buttons are 0-2, SDL 1-3
-              HEAP8[(((ptr)+(9))|0)]=down ? 1 : 0;
-              tempBigInt=Browser.mouseX;HEAP8[(((ptr)+(12))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(13))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(14))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(15))|0)]=tempBigInt&0xff;
-              tempBigInt=Browser.mouseY;HEAP8[(((ptr)+(16))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(17))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(18))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(19))|0)]=tempBigInt&0xff;
-            } else {
-              tempBigInt=SDL.DOMEventToSDLEvent[event.type];HEAP8[(ptr)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(1))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(2))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(3))|0)]=tempBigInt&0xff;
-              HEAP8[(((ptr)+(8))|0)]=SDL.buttonState;
-              tempBigInt=Browser.mouseX;HEAP8[(((ptr)+(12))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(13))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(14))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(15))|0)]=tempBigInt&0xff;
-              tempBigInt=Browser.mouseY;HEAP8[(((ptr)+(16))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(17))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(18))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(19))|0)]=tempBigInt&0xff;
-              tempBigInt=Browser.mouseMovementX;HEAP8[(((ptr)+(20))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(21))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(22))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(23))|0)]=tempBigInt&0xff;
-              tempBigInt=Browser.mouseMovementY;HEAP8[(((ptr)+(24))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(25))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(26))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(27))|0)]=tempBigInt&0xff;
+            if (window.ontouchstart === undefined || event.touching) {
+              if (event.type != 'mousemove') {
+                var down = event.type === 'mousedown';
+                tempBigInt=SDL.DOMEventToSDLEvent[event.type];HEAP8[(ptr)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(1))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(2))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(3))|0)]=tempBigInt&0xff;
+                HEAP8[(((ptr)+(8))|0)]=event.button+1; // DOM buttons are 0-2, SDL 1-3
+                HEAP8[(((ptr)+(9))|0)]=down ? 1 : 0;
+                tempBigInt=Browser.mouseX;HEAP8[(((ptr)+(12))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(13))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(14))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(15))|0)]=tempBigInt&0xff;
+                tempBigInt=Browser.mouseY;HEAP8[(((ptr)+(16))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(17))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(18))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(19))|0)]=tempBigInt&0xff;
+              } else {
+                tempBigInt=SDL.DOMEventToSDLEvent[event.type];HEAP8[(ptr)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(1))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(2))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(3))|0)]=tempBigInt&0xff;
+                HEAP8[(((ptr)+(8))|0)]=SDL.buttonState;
+                tempBigInt=Browser.mouseX;HEAP8[(((ptr)+(12))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(13))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(14))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(15))|0)]=tempBigInt&0xff;
+                tempBigInt=Browser.mouseY;HEAP8[(((ptr)+(16))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(17))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(18))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(19))|0)]=tempBigInt&0xff;
+                tempBigInt=Browser.mouseMovementX;HEAP8[(((ptr)+(20))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(21))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(22))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(23))|0)]=tempBigInt&0xff;
+                tempBigInt=Browser.mouseMovementY;HEAP8[(((ptr)+(24))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(25))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(26))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(27))|0)]=tempBigInt&0xff;
+              }
             }
             break;
           }

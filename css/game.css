@@ -13,6 +13,7 @@ body * {
     user-select: none;
     -webkit-user-select: none;
     overflow: hidden;
+    touch-action: none;
 }
 
 canvas {
@@ -292,7 +293,7 @@ div.error {
   display: block;
   cursor: pointer;
   margin: 0 20px 30px 20px;
-  opacity: 0.5;
+  opacity: 1.0;
   transition: opacity 300ms;
   -webkit-transition: opacity 300ms;
 }
