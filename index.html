@@ -25,7 +25,9 @@
         html_can_save_desc: "Now you can save games",
         html_can_load_desc: "Now you can load game saves",
         html_success: "Success",
+        html_info: "Info",
         html_game_saved: "Game successfully saved",
+        html_game_protected: "Protected game file cannot be overwritten.",
         html_ok: "Ok",
         html_cancel: "Cancel",
       };
@@ -132,8 +134,12 @@
 
       if (window.ontouchstart === null) {
         function touchHandler(event) {
+          if (event.touches.length > 1){
+            event.preventDefault();
+            return;
+          }
           var touch = event.changedTouches[0];
-          var event = new MouseEvent({
+          event = new MouseEvent({
             touchstart: "mousedown",
             touchmove: "mousemove",
             touchend: "mouseup"
@@ -146,8 +152,6 @@
             screenY: touch.screenY,
             clientX: touch.clientX,
             clientY: touch.clientY,
-            mouseMovementX: 0,
-            mouseMovementY: 0,
             ctrlKey: false,
             altKey: false,
             shiftKey: false,
@@ -162,5 +166,11 @@
         window.addEventListener("touchmove", touchHandler, true);
         window.addEventListener("touchend", touchHandler, true);
       }
+
+      document.addEventListener("visibilitychange", function() {
+        if (document.visibilityState !== "visible") {
+          Epicport.API.autoSave();
+        }
+      });
     </script>
 </body>

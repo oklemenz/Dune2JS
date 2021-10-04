@@ -13,7 +13,11 @@ body * {
     user-select: none;
     -webkit-user-select: none;
     overflow: hidden;
-    touch-action: none;
+}
+
+input {
+    user-select: auto;
+    -webkit-user-select: auto;
 }
 
 canvas {
@@ -29,7 +33,8 @@ canvas {
 }
 
 .game_container {
-  display: block;
+    display: block;
+    touch-action: none;
 }
 
 .section-divider {
@@ -220,7 +225,7 @@ div.error {
 
 .openxcom_eula input, .dialog input {
   display: block;
-  width: 600px;
+  width: calc(100% - 15px);
   font-size: 1.2em;
   padding: 5px;
 }

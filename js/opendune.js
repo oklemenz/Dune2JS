@@ -8529,6 +8529,7 @@ function copyTempDouble(ptr) {
           }
           case 'mousedown': case 'mouseup': case 'mousemove': {
             if (window.ontouchstart === undefined || event.touching) {
+              // console.log(event.type, Browser.mouseX, Browser.mouseY, Browser.mouseMovementX, Browser.mouseMovementY);
               if (event.type != 'mousemove') {
                 var down = event.type === 'mousedown';
                 tempBigInt=SDL.DOMEventToSDLEvent[event.type];HEAP8[(ptr)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(1))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(2))|0)]=tempBigInt&0xff;tempBigInt = tempBigInt>>8;HEAP8[(((ptr)+(3))|0)]=tempBigInt&0xff;
@@ -8754,7 +8755,7 @@ function copyTempDouble(ptr) {
         document.addEventListener("keydown", SDL.receiveEvent);
         document.addEventListener("keyup", SDL.receiveEvent);
         document.addEventListener("keypress", SDL.receiveEvent);
-        window.addEventListener("blur", SDL.receiveEvent);
+        // window.addEventListener("blur", SDL.receiveEvent);
         document.addEventListener("visibilitychange", SDL.receiveEvent);
       }
   
