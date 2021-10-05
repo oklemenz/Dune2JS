@@ -189,7 +189,7 @@ Epicport.API = (function() {
       if (!Epicport.API.selectFileDialogPtr) {
         Epicport.API.selectFileDialogPtr = Module['_malloc'](128);
       }
-      Module['writeStringToMemory']("Autosave.dat", Epicport.API.selectFileDialogPtr);
+      Module['writeStringToMemory'](Epicport.i18n.html_autosave, Epicport.API.selectFileDialogPtr);
       Module['dunCall']('vi', 4, [Epicport.API.selectFileDialogPtr]);
     } catch(err) {}
   }
@@ -223,9 +223,12 @@ Epicport.API = (function() {
         gameState.set("data", parseFile);
         return gameState.save();
       }).then(function() {
+        Epicport.API.files = Epicport.API.files.filter(function (file) {
+          return !file.endsWith("/" + Epicport.i18n.html_autosave);
+        });
         Epicport.API.files.unshift(file);
         done();
-        if (document.visibilityState == "visible") {
+        if (fileName !== Epicport.i18n.html_autosave) {
           return Epicport.modalMessage(Epicport.i18n.html_success, Epicport.i18n.html_game_saved);
         }
       });

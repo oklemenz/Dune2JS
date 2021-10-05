@@ -225,9 +225,10 @@ div.error {
 
 .openxcom_eula input, .dialog input {
   display: block;
-  width: calc(100% - 15px);
+  width: calc(100% - 12px);
   font-size: 1.2em;
   padding: 5px;
+  outline: none;
 }
 
 .openxcom_eula .label {
