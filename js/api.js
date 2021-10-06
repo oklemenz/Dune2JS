@@ -223,8 +223,8 @@ Epicport.API = (function() {
         gameState.set("data", parseFile);
         return gameState.save();
       }).then(function() {
-        Epicport.API.files = Epicport.API.files.filter(function (file) {
-          return !file.endsWith("/" + Epicport.i18n.html_autosave);
+        Epicport.API.files = Epicport.API.files.filter(function (_file) {
+          return file !== _file;
         });
         Epicport.API.files.unshift(file);
         done();
