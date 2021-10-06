@@ -122,7 +122,7 @@ Epicport.API = (function() {
     if (files.length) {
       $(".select-file-dialog ul").empty();
       for (_i = 0, _len = files.length; _i < _len; _i++) {
-        file = files[_i];
+        file = files[_i].name;
         filename = file.substring(file.lastIndexOf('/') + 1);
         $(".select-file-dialog ul").append("<li>" + filename + "</li>");
       }
@@ -141,6 +141,8 @@ Epicport.API = (function() {
       }
       Module['writeStringToMemory'](filename, Epicport.API.selectFileDialogPtr);
       Module['dunCall']('vi', callback, [Epicport.API.selectFileDialogPtr]);
+      var file = files.find(file => file.name.endsWith("/" + filename));
+      API.prototype.houseArgument(file && file.house);
       if (!(typeof Module === 'undefined')) {
         return Module['disable_sdl_envents'] = false;
       }
@@ -149,7 +151,8 @@ Epicport.API = (function() {
       text: Epicport.i18n.html_ok,
       click: function() {
         var selected;
-        selected = $('#select-file-dialog-file').val();
+        selected = $('#select-file-dialog-file').val() || "";
+        selected = selected.replace(/[^\w]/gi, "");
         if (selected) {
           success(selected + "." + extension);
           return $(this).dialog("close");
@@ -224,9 +227,12 @@ Epicport.API = (function() {
         return gameState.save();
       }).then(function() {
         Epicport.API.files = Epicport.API.files.filter(function (_file) {
-          return file !== _file;
+          return file !== _file.name;
         });
-        Epicport.API.files.unshift(file);
+        Epicport.API.files.unshift({
+          name: file,
+          house: houseName,
+        });
         done();
         if (fileName !== Epicport.i18n.html_autosave) {
           return Epicport.modalMessage(Epicport.i18n.html_success, Epicport.i18n.html_game_saved);
@@ -256,7 +262,10 @@ Epicport.API = (function() {
     query.descending("updatedAt");
     query.find().then(function(results) {
       var files = results.map(function(object) {
-        return "/home/caiiiycuk/play-dune/data/" + object.get("name");
+        return {
+          name: "/home/caiiiycuk/play-dune/data/" + object.get("name"),
+          house: object.get("house"),
+        };
       });
       return Epicport.API.loadFiles(files, function() {
         done();
@@ -280,7 +289,7 @@ Epicport.API = (function() {
     for (_i = 0, _len = files.length; _i < _len; _i++) {
       file = files[_i];
       Epicport.API.files.push(file);
-      loaders.push(this.loadFile(file));
+      loaders.push(this.loadFile(file.name));
     }
     return async.parallel(loaders, function(error, files) {
       var name, parent, _j, _len1;
@@ -308,7 +317,6 @@ Epicport.API = (function() {
     return function(callback) {
       var GameState = Parse.Object.extend("GameState");
       var query = new Parse.Query(GameState);
-      var houseName;
       var name = fileName.split("/").pop();
       query.equalTo("profile", Epicport.profile.identity);
       query.equalTo("name", name);
@@ -316,10 +324,8 @@ Epicport.API = (function() {
         if (!object) {
           return callback(new Error("Not Found"), null);
         }
-        houseName = object.get("houseName");
         return object.get("data").getData();
       }).then(function (data) {
-        API.prototype.houseArgument(houseName);
         return callback(null, {
           file: fileName,
           data: atob(data)

@@ -225,7 +225,7 @@ div.error {
 
 .openxcom_eula input, .dialog input {
   display: block;
-  width: calc(100% - 12px);
+  width: calc(100% - 14px);
   font-size: 1.2em;
   padding: 5px;
   outline: none;
