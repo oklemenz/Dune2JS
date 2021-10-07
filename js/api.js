@@ -142,7 +142,9 @@ Epicport.API = (function() {
       Module['writeStringToMemory'](filename, Epicport.API.selectFileDialogPtr);
       Module['dunCall']('vi', callback, [Epicport.API.selectFileDialogPtr]);
       var file = files.find(file => file.name.endsWith("/" + filename));
-      API.prototype.houseArgument(file && file.house);
+      if (file && file.house) {
+        API.prototype.houseArgument(file && file.house);
+      }
       if (!(typeof Module === 'undefined')) {
         return Module['disable_sdl_envents'] = false;
       }
@@ -189,6 +191,9 @@ Epicport.API = (function() {
 
   API.prototype.autoSave = function() {
     try {
+      if (Epicport.profile.identity === "public") {
+        return;
+      }
       if (!Epicport.API.selectFileDialogPtr) {
         Epicport.API.selectFileDialogPtr = Module['_malloc'](128);
       }
