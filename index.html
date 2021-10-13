@@ -114,16 +114,18 @@
         var gameContainer = jQuery(".game_container");
         var width = window.innerWidth;
         var height = window.innerHeight;
-        if (width >= height) {
-            gameContainer.width(height * ratio);
-            gameContainer.height(height);
-            gameContainer.css("padding-top", "");
-            gameContainer.parent().removeClass("small");
+        if (width >= height * ratio) {
+          gameContainer.width(height * ratio);
+          gameContainer.height(height);
+          gameContainer.css("margin-top", "");
+          gameContainer.css("margin-left", (width - height * ratio) / 2);
+          gameContainer.parent().removeClass("small");
         } else {
-            gameContainer.width(width);
-            gameContainer.height(width / ratio);
-            gameContainer.css("padding-top", (height - width / ratio) / 2);
-            gameContainer.parent().addClass("small");
+          gameContainer.width(width);
+          gameContainer.height(width / ratio);
+          gameContainer.css("margin-top", (height - width / ratio) / 2);
+          gameContainer.css("margin-left", "");
+          gameContainer.parent().addClass("small");
         }
       }
       jQuery(document).ready(function () {
