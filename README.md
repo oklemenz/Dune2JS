@@ -29,6 +29,17 @@ Dune II reimplementation written in HTML5 / JavaScript
 
 ## Options
 
-Url parameters are leveraged to save game state automatically (shortcut in brackets)
+Url parameters are leveraged to save game state automatically:
 
 - `profile`: Profile identity (default: 'public')
+
+## Auto-save
+
+- `profile=public`: no auto-save
+- `profile=<other>`: game is auto-saved: 
+  - when going into background (visibility hidden)
+  - every 5 minutes
+
+## Credits
+
+- https://github.com/caiiiycuk

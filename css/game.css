@@ -7,6 +7,13 @@ body {
     background-color: black;
 }
 
+@media (orientation: portrait) {
+    html,
+    body {
+        overflow: hidden;
+    }
+}
+
 body,
 body * {
     -webkit-touch-callout: none;
@@ -225,9 +232,10 @@ div.error {
 
 .openxcom_eula input, .dialog input {
   display: block;
-  width: calc(100% - 15px);
+  width: calc(100% - 14px);
   font-size: 1.2em;
   padding: 5px;
+  outline: none;
 }
 
 .openxcom_eula .label {
