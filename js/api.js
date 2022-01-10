@@ -136,18 +136,27 @@ Epicport.API = (function() {
       Module['disable_sdl_envents'] = true;
     }
     success = function(filename) {
-      if (!Epicport.API.selectFileDialogPtr) {
-        Epicport.API.selectFileDialogPtr = Module['_malloc'](128);
+      function processFile() {
+        if (!Epicport.API.selectFileDialogPtr) {
+          Epicport.API.selectFileDialogPtr = Module['_malloc'](128);
+        }
+        Module['writeStringToMemory'](filename, Epicport.API.selectFileDialogPtr);
+        Module['dunCall']('vi', callback, [Epicport.API.selectFileDialogPtr]);
+        if (!(typeof Module === 'undefined')) {
+          return Module['disable_sdl_envents'] = false;
+        }
       }
-      Module['writeStringToMemory'](filename, Epicport.API.selectFileDialogPtr);
-      Module['dunCall']('vi', callback, [Epicport.API.selectFileDialogPtr]);
       var file = files.find(file => file.name.endsWith("/" + filename));
-      if (file && file.house) {
-        API.prototype.houseArgument(file && file.house);
+      if (file) {
+        if (file.house) {
+          API.prototype.houseArgument(file && file.house);
+        }
+        if (!file.loaded) {
+          Epicport.API.loadFiles([file], processFile);
+          return;
+        }
       }
-      if (!(typeof Module === 'undefined')) {
-        return Module['disable_sdl_envents'] = false;
-      }
+      processFile();
     };
     okButton = {
       text: Epicport.i18n.html_ok,
@@ -181,6 +190,7 @@ Epicport.API = (function() {
       width: 650,
       modal: true,
       buttons: buttons,
+      closeText: "",
       close: function() {
         if (!(typeof Module === 'undefined')) {
           return Module['disable_sdl_envents'] = false;
@@ -237,6 +247,7 @@ Epicport.API = (function() {
         Epicport.API.files.unshift({
           name: file,
           house: houseName,
+          loaded: true,
         });
         done();
         if (fileName !== Epicport.i18n.html_autosave) {
@@ -270,12 +281,12 @@ Epicport.API = (function() {
         return {
           name: "/home/caiiiycuk/play-dune/data/" + object.get("name"),
           house: object.get("house"),
+          loaded: false,
         };
       });
-      return Epicport.API.loadFiles(files, function() {
-        done();
-        return Epicport.API.fsCreated = true;
-      })
+      Epicport.API.listFiles(files);
+      done();
+      return Epicport.API.fsCreated = true;
     }).catch(function(error) {
       var status;
       done();
@@ -285,6 +296,13 @@ Epicport.API = (function() {
     });
   };
 
+  API.prototype.listFiles = function(files) {
+    for (_i = 0, _len = files.length; _i < _len; _i++) {
+      file = files[_i];
+      Epicport.API.files.push(file);
+    }
+  }
+
   API.prototype.loadFiles = function(files, callback) {
     var file, loaders, _i, _len;
     if (files.length) {
@@ -293,8 +311,7 @@ Epicport.API = (function() {
     loaders = [];
     for (_i = 0, _len = files.length; _i < _len; _i++) {
       file = files[_i];
-      Epicport.API.files.push(file);
-      loaders.push(this.loadFile(file.name));
+      loaders.push(this.loadFile(file));
     }
     return async.parallel(loaders, function(error, files) {
       var name, parent, _j, _len1;
@@ -318,11 +335,11 @@ Epicport.API = (function() {
     });
   };
 
-  API.prototype.loadFile = function(fileName) {
+  API.prototype.loadFile = function(file) {
     return function(callback) {
       var GameState = Parse.Object.extend("GameState");
       var query = new Parse.Query(GameState);
-      var name = fileName.split("/").pop();
+      var name = file.name.split("/").pop();
       query.equalTo("profile", Epicport.profile.identity);
       query.equalTo("name", name);
       query.first().then(function (object) {
@@ -331,8 +348,9 @@ Epicport.API = (function() {
         }
         return object.get("data").getData();
       }).then(function (data) {
+        file.loaded = true;
         return callback(null, {
-          file: fileName,
+          file: file.name,
           data: atob(data)
         });
       }).catch(function (error) {

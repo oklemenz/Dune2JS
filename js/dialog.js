@@ -5,6 +5,7 @@ Epicport.modalMessage = function(title, message, callback) {
   return div.dialog({
     dialogClass: "modal",
     modal: true,
+    closeText: "",
     buttons: {
       'Ok': function() {
         $(this).dialog('close');

@@ -37,6 +37,7 @@ Epicport.Dune2 = (function() {
     return $(".dune2-select-house-dialog").dialog({
       width: 650,
       modal: true,
+      closeText: "",
       close: function() {
         var startGame;
         startGame = (function(_this) {
