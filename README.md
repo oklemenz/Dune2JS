@@ -4,12 +4,12 @@ Dune II reimplementation written in HTML5 / JavaScript
 
 ## Play Online
 
-- Browser: https://dune2.oklemenz.de
+- Browser: https://dune2js.com
 - Keyboard / Mouse Controls
 
 ## Play Mobile
 
-- Browser: https://dune2.oklemenz.de
+- Browser: https://dune2js.com
   - Use Landscape Mode (Single Tab, Disable Landscape Tab Bar in Browser Settings)
 - Add to Home Screen to start as Fullscreen App
 - Touch Controls (tap/drag area on screen):
