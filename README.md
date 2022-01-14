@@ -29,7 +29,7 @@ Dune II reimplementation written in HTML5 / JavaScript
 
 ## Options
 
-Url parameters are leveraged to save game state automatically:
+Url parameter is leveraged to save game state for a profile:
 
 - `profile`: Profile identity (default: 'public')
 
