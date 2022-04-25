@@ -22,6 +22,12 @@ body * {
     overflow: hidden;
 }
 
+@supports (-webkit-touch-callout: none) {
+    body {
+        margin-top: 0.5px;
+    }
+}
+
 input {
     user-select: auto;
     -webkit-user-select: auto;
