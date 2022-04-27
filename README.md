@@ -12,7 +12,7 @@ Dune II reimplementation written in HTML5 / JavaScript
 - Browser: https://dune2js.com
   - Use Landscape Mode (Single Tab, Disable Landscape Tab Bar in Browser Settings)
 - Add to Home Screen to start as Fullscreen App
-- Touch Controls (tap/drag area on screen):
+- Touch Controls (tap/drag area on screen)
 
 ## Play GitHub Version
 
