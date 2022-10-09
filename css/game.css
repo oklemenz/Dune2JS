@@ -114,6 +114,7 @@ canvas {
 .ui-dialog {
     overflow: visible;
     max-width: 650px;
+    touch-action: none;
 }
 
 .dialog {
