@@ -117,6 +117,10 @@ canvas {
     touch-action: none;
 }
 
+.ui-widget-content {
+    touch-action: none;
+}
+
 .dialog {
     display: none;
 }
