@@ -53,40 +53,42 @@
     </script>
 </head>
 <body oncontextmenu="return false;">
-<div class="dune2-select-house-dialog dialog" title="Choose your side">
-    <div class="opendune-house-container">
-        <p class="opendune-select-house">Choose your side</p>
-        <p class="opendune-house opendune-a-house" title="House Atreides"></p>
-        <p class="opendune-house opendune-o-house" title="House Ordos"></p>
-        <p class="opendune-house opendune-h-house" title="House Harkonnen"></p>
-    </div>
-</div>
-<div class="game_container opendune">
-    <canvas id="canvas"></canvas>
-    <div id="output" class="canvas_overlay">
-        <div class="click_to_start">
-            <span class="huge">Press to Start</span>
+<div class="game">
+    <div class="dune2-select-house-dialog dialog" title="Choose your side">
+        <div class="opendune-house-container">
+            <p class="opendune-select-house">Choose your side</p>
+            <p class="opendune-house opendune-a-house" title="House Atreides"></p>
+            <p class="opendune-house opendune-o-house" title="House Ordos"></p>
+            <p class="opendune-house opendune-h-house" title="House Harkonnen"></p>
         </div>
-        <div class="loader">
-            <div class="info">
-                <div id="status" class="status">Loading...</div>
+    </div>
+    <div class="game_container opendune">
+        <canvas id="canvas"></canvas>
+        <div id="output" class="canvas_overlay">
+            <div class="click_to_start">
+                <span class="huge">Press to Start</span>
             </div>
-        </div>
+            <div class="loader">
+                <div class="info">
+                    <div id="status" class="status">Loading...</div>
+                </div>
+            </div>
 
+        </div>
     </div>
-</div>
-<div class="select-file-dialog dialog" title="Select file">
-    <p class="label">
-        Select file
-    </p>
-    <ul class="select-file-dialog-saves">
-        <span>No saved games found</span>
-    </ul>
-    <p></p>
-    <p class="select-file-input">
-        <label for="select-file-dialog-file">Enter file name</label>
-        <input id="select-file-dialog-file" type="text" value="">
-    </p>
+    <div class="select-file-dialog dialog" title="Select file">
+        <p class="label">
+            Select file
+        </p>
+        <ul class="select-file-dialog-saves">
+            <span>No saved games found</span>
+        </ul>
+        <p></p>
+        <p class="select-file-input">
+            <label for="select-file-dialog-file">Enter file name</label>
+            <input id="select-file-dialog-file" type="text" value="">
+        </p>
+    </div>
 </div>
 <script type="text/javascript">
   Epicport.API = new Epicport.API({

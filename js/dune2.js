@@ -35,8 +35,11 @@ Epicport.Dune2 = (function() {
 
   Dune2.prototype.start = function(jsFile) {
     return $(".dune2-select-house-dialog").dialog({
+      appendTo: ".game",
       width: 650,
       modal: true,
+      draggable: false,
+      resizeable: false,
       closeText: "",
       close: function() {
         var startGame;

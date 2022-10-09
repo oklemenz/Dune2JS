@@ -3,8 +3,11 @@ Epicport.modalMessage = function(title, message, callback) {
   var div;
   div = $('<div title="' + title + '">' + message + '</div>');
   return div.dialog({
+    appendTo: ".game",
     dialogClass: "modal",
     modal: true,
+    draggable: false,
+    resizeable: false,
     closeText: "",
     buttons: {
       'Ok': function() {
@@ -20,7 +23,8 @@ Epicport.modalMessage = function(title, message, callback) {
 Epicport.modalProgress = function() {
   var div;
   div = $('<div class="progress_modal"></div>');
-  $(document.body).append(div);
+  var game = jQuery(".game");
+  $(game).append(div);
   return function() {
     return div.remove();
   };

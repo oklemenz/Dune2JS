@@ -187,8 +187,11 @@ Epicport.API = (function() {
       buttons = [okButton, cancelButton];
     }
     return $(".select-file-dialog").dialog({
+      appendTo: ".game",
       width: 650,
       modal: true,
+      draggable: false,
+      resizeable: false,
       buttons: buttons,
       closeText: "",
       close: function() {
