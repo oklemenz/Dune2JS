@@ -226,24 +226,42 @@ Epicport.API = (function() {
     }
     contents = fs_object.contents;
     var houseName = Epicport.API.houseName();
-    var fileName = file.split("/").pop();
-    var GameState = Parse.Object.extend("GameState");
-    var query = new Parse.Query(GameState);
-    query.equalTo("profile", Epicport.profile.identity);
-    query.equalTo("name", fileName);
-    query.first().then(function(gameState) {
-      if (gameState && gameState.get("protected")) {
-        return Epicport.modalMessage(Epicport.i18n.html_info, Epicport.i18n.html_game_protected);
+    var fileName = file.split("/").pop().split(".")[0];
+    var { db, ts, ref, get, set, push } = firebase;
+    const gameStateRef = ref(db, `gameState/${Epicport.profile.identity}/${fileName}`);
+    get(gameStateRef).then((snapshot) => {
+      const data = {
+        profile: Epicport.profile.identity,
+        name: fileName,
+        house: houseName,
+        content: btoa(String.fromCharCode.apply(null, new Uint8Array(contents))),
+        timestamp: ts(),
+      };
+      let dataKey;
+      if (snapshot.exists()) {
+        if (snapshot.val().protected) {
+          return Epicport.modalMessage(Epicport.i18n.html_info, Epicport.i18n.html_game_protected);
+        }
+        dataKey = snapshot.val().data;
+        set(ref(db, `data/${Epicport.profile.identity}/${dataKey}`), data);
+      } else {
+        const fileRef = push(ref(db, `data/${Epicport.profile.identity}`), data);
+        dataKey = fileRef.key;
       }
-      var parseFile = new Parse.File(fileName, contents, "application/octet-stream");
-      return parseFile.save().then(function() {
-        gameState = gameState || new Parse.Object("GameState");
-        gameState.set("profile", Epicport.profile.identity);
-        gameState.set("name", fileName);
-        gameState.set("house", houseName);
-        gameState.set("data", parseFile);
-        return gameState.save();
+      set(gameStateRef, {
+        profile: Epicport.profile.identity,
+        name: fileName,
+        house: houseName,
+        data: dataKey,
+        timestamp: ts(),
       }).then(function() {
+        const { analytics, logEvent } = firebase;
+        logEvent(analytics, "save", {
+          profile: data.profile,
+          name: data.name,
+          house: data.house,
+          value: data.content.length,
+        });
         Epicport.API.files = Epicport.API.files.filter(function (_file) {
           return file !== _file.name;
         });
@@ -253,7 +271,7 @@ Epicport.API = (function() {
           loaded: true,
         });
         done();
-        if (fileName !== Epicport.i18n.html_autosave) {
+        if (fileName + ".dat" !== Epicport.i18n.html_autosave) {
           return Epicport.modalMessage(Epicport.i18n.html_success, Epicport.i18n.html_game_saved);
         }
       });
@@ -275,17 +293,21 @@ Epicport.API = (function() {
       return;
     }
     done = Epicport.modalProgress();
-    var GameState = Parse.Object.extend("GameState");
-    var query = new Parse.Query(GameState);
-    query.equalTo("profile", Epicport.profile.identity);
-    query.descending("updatedAt");
-    query.find().then(function(results) {
-      var files = results.map(function(object) {
-        return {
-          name: "/home/caiiiycuk/play-dune/data/" + object.get("name"),
-          house: object.get("house"),
+    var { db, ref, query, get, orderByChild, limitToLast } = firebase;
+    const gameStateRef = ref(db, `gameState/${Epicport.profile.identity}`);
+    get(query(gameStateRef, orderByChild("timestamp"), limitToLast(500))).then((snapshot) => {
+      var files = [];
+      snapshot.forEach(function(object) {
+        files.unshift({
+          name: "/home/caiiiycuk/play-dune/data/" + object.val().name + ".dat",
+          house: object.val().house,
           loaded: false,
-        };
+        });
+      });
+      const { analytics, logEvent } = firebase;
+      logEvent(analytics, "list", {
+        profile: Epicport.profile.identity,
+        value: files.length,
       });
       Epicport.API.listFiles(files);
       done();
@@ -340,21 +362,33 @@ Epicport.API = (function() {
 
   API.prototype.loadFile = function(file) {
     return function(callback) {
-      var GameState = Parse.Object.extend("GameState");
-      var query = new Parse.Query(GameState);
-      var name = file.name.split("/").pop();
-      query.equalTo("profile", Epicport.profile.identity);
-      query.equalTo("name", name);
-      query.first().then(function (object) {
-        if (!object) {
+      let size = 0;
+      var fileName = file.name.split("/").pop().split(".")[0];
+      var { db, ref, get } = firebase;
+      const gameStateRef = ref(db, `gameState/${Epicport.profile.identity}/${fileName}`);
+      get(gameStateRef).then((snapshot) => {
+        if (!snapshot.exists()) {
           return callback(new Error("Not Found"), null);
         }
-        return object.get("data").getData();
-      }).then(function (data) {
-        file.loaded = true;
-        return callback(null, {
-          file: file.name,
-          data: atob(data)
+        return Promise.resolve(snapshot.val().data).then(function (key) {
+          const dataRef = ref(db, `data/${Epicport.profile.identity}/${key}`);
+          return get(dataRef);
+        }).then(function (snapshot) {
+          size = snapshot.val().content.length;
+          return atob(snapshot.val().content);
+        }).then(function (data) {
+          const { analytics, logEvent } = firebase;
+          logEvent(analytics, "load", {
+            profile: Epicport.profile.identity,
+            name: fileName,
+            house: file.house,
+            value: size,
+          });
+          file.loaded = true;
+          return callback(null, {
+            file: file.name,
+            data
+          });
         });
       }).catch(function (error) {
         var status;

@@ -44,12 +44,38 @@
     <script type="text/javascript" src="js/canvas.js"></script>
     <script type="text/javascript" src="js/dune2.js"></script>
     <script type="text/javascript" src="js/api.js"></script>
-    <script type="text/javascript" src="js/parse.min.js"></script>
-    <script>
-      // https://parse-dashboard.back4app.com/apps/83701dbe-3bbe-4bf8-a050-cc9c3ec57452/server-settings > Core Settings > Settings
-      // App Id, Javascript Key
-      Parse.initialize("49Ep7UTHKcvkPYvxbEXBM9k0nb6TSh8oL6yakWCW", "1bTKz5nD7iusYBiyNw8CnaTNvwuy63PWxKYu67IU");
-      Parse.serverURL = "https://parseapi.back4app.com/";
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+      import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+      import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
+      import { getDatabase, serverTimestamp, ref, query, get, set, push, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyDmXth60JN9eiAh-vHVCLEPy66P3SOk7OY",
+        authDomain: "dune2-1ee3b.firebaseapp.com",
+        projectId: "dune2-1ee3b",
+        storageBucket: "dune2-1ee3b.appspot.com",
+        messagingSenderId: "627922875052",
+        appId: "1:627922875052:web:987774bcd0985c133e6509",
+        measurementId: "G-RK068C4YP1",
+        databaseURL: "https://dune2-1ee3b-default-rtdb.europe-west1.firebasedatabase.app",
+      };
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      signInAnonymously(getAuth());
+      window.firebase = {
+        app,
+        analytics,
+        logEvent,
+        db: getDatabase(app),
+        ts: serverTimestamp,
+        ref,
+        query,
+        get,
+        set,
+        push,
+        orderByChild,
+        limitToLast,
+      };
     </script>
 </head>
 <body oncontextmenu="return false;">
