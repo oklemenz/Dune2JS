@@ -216,7 +216,7 @@ Epicport.API = (function() {
   }
 
   API.prototype.pushSave = function(filePtr) {
-    var contents, done, file, fs_object;
+    var contents, done, file, fs_object, overwrite;
     done = Epicport.modalProgress();
     file = Module['Pointer_stringify'](filePtr);
     if (Module['FS_findObject']) {
@@ -244,9 +244,11 @@ Epicport.API = (function() {
         }
         dataKey = snapshot.val().data;
         set(ref(db, `data/${Epicport.profile.identity}/${dataKey}`), data);
+        overwrite = true;
       } else {
         const fileRef = push(ref(db, `data/${Epicport.profile.identity}`), data);
         dataKey = fileRef.key;
+        overwrite = false;
       }
       set(gameStateRef, {
         profile: Epicport.profile.identity,
@@ -256,11 +258,14 @@ Epicport.API = (function() {
         timestamp: ts(),
       }).then(function() {
         const { analytics, logEvent } = firebase;
-        logEvent(analytics, "save", {
+        const autosave = (fileName + ".dat" === Epicport.i18n.html_autosave);
+        const event = autosave ? "autosave" : "save";
+        logEvent(analytics, event, {
           profile: data.profile,
           name: data.name,
           house: data.house,
           value: data.content.length,
+          overwrite,
         });
         Epicport.API.files = Epicport.API.files.filter(function (_file) {
           return file !== _file.name;
@@ -271,7 +276,7 @@ Epicport.API = (function() {
           loaded: true,
         });
         done();
-        if (fileName + ".dat" !== Epicport.i18n.html_autosave) {
+        if (!autosave) {
           return Epicport.modalMessage(Epicport.i18n.html_success, Epicport.i18n.html_game_saved);
         }
       });
@@ -366,7 +371,7 @@ Epicport.API = (function() {
       var fileName = file.name.split("/").pop().split(".")[0];
       var { db, ref, get } = firebase;
       const gameStateRef = ref(db, `gameState/${Epicport.profile.identity}/${fileName}`);
-      get(gameStateRef).then((snapshot) => {
+      return get(gameStateRef).then((snapshot) => {
         if (!snapshot.exists()) {
           return callback(new Error("Not Found"), null);
         }
