@@ -136,14 +136,23 @@ Epicport.API = (function() {
       Module['disable_sdl_envents'] = true;
     }
     success = function(filename) {
-      function processFile() {
+      function processFile(error) {
+        if (error) {
+          return;
+        }
         if (!Epicport.API.selectFileDialogPtr) {
           Epicport.API.selectFileDialogPtr = Module['_malloc'](128);
         }
-        Module['writeStringToMemory'](filename, Epicport.API.selectFileDialogPtr);
-        Module['dunCall']('vi', callback, [Epicport.API.selectFileDialogPtr]);
         if (!(typeof Module === 'undefined')) {
-          return Module['disable_sdl_envents'] = false;
+          Module['disable_sdl_envents'] = false;
+        }
+        try {
+          Module['writeStringToMemory'](filename, Epicport.API.selectFileDialogPtr);
+          Module['dunCall']('vi', callback, [Epicport.API.selectFileDialogPtr]);
+        } catch (error) {
+          if (error) {
+            Epicport.modalMessage(Epicport.i18n.html_error, Epicport.i18n.html_game_load_error);
+          }
         }
       }
       var file = files.find(file => file.name.endsWith("/" + filename));
@@ -361,7 +370,7 @@ Epicport.API = (function() {
           Module['FS_createDataFile'](parent, name, file.data, true, true);
         }
       }
-      return callback();
+      return callback(error);
     });
   };
 
@@ -390,16 +399,16 @@ Epicport.API = (function() {
             value: size,
           });
           file.loaded = true;
+          if (data.length < 500) {
+            throw new Error(Epicport.i18n.html_game_load_error);
+          }
           return callback(null, {
             file: file.name,
             data
           });
         });
       }).catch(function (error) {
-        var status;
-        status = 500;
         error = String(error) || "Unknown error";
-        Epicport.modalMessage("Error (" + status + ")", "(" + status + "): " + error);
         return callback(error, null);
       })
     };
