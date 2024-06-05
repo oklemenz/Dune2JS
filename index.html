@@ -140,6 +140,16 @@
   });
   var Module = Epicport.API.module();
 
+  var canvas = document.getElementById("canvas");
+  var canvasPreventDefault = function (e) {
+      if (e.target === canvas) {
+          e.preventDefault();
+      }
+  }
+  document.body.addEventListener("touchstart", canvasPreventDefault, false);
+  document.body.addEventListener("touchend", canvasPreventDefault, false);
+  document.body.addEventListener("touchmove", canvasPreventDefault, false);
+
   function setSize() {
     var ratio = 640 / 400;
     var gameContainer = jQuery(".game_container");
